@@ -28,11 +28,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    
+    # Third party apps
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
     
     # Local app
     'accounts',
     'pages',
 ]
+
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+  'django.contrib.auth.backends.ModelBackend',
+  'allauth.account.auth_backends.AuthenticationBackend',
+)
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_URL = 'home'
+
+CRISPY_TEMPLATE_PACK= 'bootstrap4'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -44,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -113,6 +130,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -120,4 +139,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'home'
+
+

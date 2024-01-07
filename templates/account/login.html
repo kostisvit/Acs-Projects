@@ -4,9 +4,9 @@
 
 {% block content %}
     <h2>Log in</h2>
-    <form method="post">
+    <form method="post" >
         {% csrf_token %}
-        <div class="form-group">
+        {% comment %} <div class="form-group">
             <label for="username">Username</label>
             <input id="username" name="username" class="form-control" type="text" required>
         </div>
@@ -14,6 +14,8 @@
             <label for="password">Password</label>
             <input id="password" name="password" class="form-control" type="password" required>
         </div>
-        <button type="submit" class="btn btn-primary">Log in</button>
+        <button type="submit"  value="{{next}}" class="btn btn-primary">Log in</button> {% endcomment %}
+        {{ form.as_p}}
+        <button type="submit"  value="{{next}}" class="btn btn-primary">Log in</button>
     </form>
 {% endblock %}
