@@ -5,12 +5,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1 class="text-3xl font-bold underline">Home</h1>
-    {% if user.is_authenticated %}
-        Hi {{ user.email }}
-        <p><a href="{% url 'account_logout' %}">Log Out</a></p>
-        {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'account_login' %}">Login</a>
-        {% endif %}
+
+
+
+
 {% endblock %}
