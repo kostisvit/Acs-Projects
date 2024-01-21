@@ -7,8 +7,9 @@ app_name = 'project'
 
 
 urlpatterns = [
-    path('', views.projects, name='home'),
+    path('', views.home, name='home'),
     path('add/', views.add, name='add'),
+    path('projects/', views.projects, name='projects'),
     # path('<uuid:pk>/', views.project, name='project'),
     # path('<uuid:pk>/edit/', views.edit, name='edit'),
     # path('<uuid:pk>/delete/', views.delete, name='delete'),

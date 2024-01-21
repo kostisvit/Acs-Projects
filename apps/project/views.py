@@ -6,6 +6,11 @@ from django.shortcuts import render, redirect
 
 
 @login_required
+def home(request):
+    return render(request, 'project/home.html')
+
+
+@login_required
 def projects(request):
     projects = Project.objects.filter(author=request.user)
 
