@@ -12,10 +12,11 @@
             <h1 class="text-xl text-white">AcsServices Projects</h1>
 
             <div class="space-x-4">
-                <a href="#" class="text-white">About</a>
                 {% if user.is_authenticated %}
+                <a href="#" class="text-white">{{user.username}}</a>
                 <a href="{% url 'accounts:logout' %}" class="py-4 px-8 bg-slate-600 text-white">Log out</a>
                 {% else %}
+                <a href="#" class="text-white">Anonymous</a>
                 <a href="{% url 'accounts:login' %}" class="py-4 px-8 bg-slate-600 text-white">Log in</a>
                 {% endif %}
                 <a href="#" class="py-4 px-8 bg-sky-600 text-white">Sign up</a>
