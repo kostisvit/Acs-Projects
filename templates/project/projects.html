@@ -18,7 +18,7 @@
                         {{ project.created_at }} από <a href="" class="font-medium"> {{ project.author }}</a>
                     </p>
                     <a href="{% url 'project:edit' project.id %}" class="text-green-700">Edit</a>
-                    <a href="{% url 'project:delete' project.id %}" class="text-red-600">Delete</a>
+                    <a href="{% url 'project:delete' project.id %}" class="text-red-600 ml-7">Delete</a>
             </div>
         {% endfor %}
     </div>
