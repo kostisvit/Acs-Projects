@@ -19,3 +19,13 @@ class Project(TimeStampMixin):
 
     def __str__(self):
         return self.name
+
+
+class ProjectFile(TimeStampMixin):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    project = models.ForeignKey(Project, related_name='files', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    attachment = models.FileField(upload_to='projectfiles')
+
+    def __str__(self):
+        return self.name
