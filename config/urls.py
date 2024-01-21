@@ -10,4 +10,5 @@ urlpatterns = [
     
     
     path('', include('pages.urls')),
+    path('', include('project.urls')),
 ]
