@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'accounts',
     'pages',
     'project',
-]
+    'task',
+    'todolist',
+    ]
 
 SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
