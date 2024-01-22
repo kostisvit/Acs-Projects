@@ -53,7 +53,7 @@
 
     <a href="{% url 'project:add_note' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-slate-600 text-white inline-block">Add note</a>
 
-    <div class="ml-10 mt-6 grid grid-cols-4 gap-4">
+    <div class="mb-10 ml-10 mt-6 grid grid-cols-4 gap-4">
         {% for note in project.notes.all %}
             <div class="py-6 px-6 bg-slate-200">
                 <a href="{% url 'project:note_detail' project.id note.id %}">
