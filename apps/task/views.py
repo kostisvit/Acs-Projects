@@ -8,14 +8,14 @@ from .models import Task
 
 @login_required
 def add(request, project_id, todolist_id):
-    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    project = Project.objects.filter(author=request.user).get(pk=project_id)
     todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
 
     if request.method == 'POST':
         name = request.POST.get('name', '')
         description = request.POST.get('description', '')
 
-        Task.objects.create(project=project, todolist=todolist, name=name, description=description, created_by=request.user)
+        Task.objects.create(project=project, todolist=todolist, name=name, description=description, author=request.user)
 
         return redirect(f'/projects/{project_id}/{todolist_id}/')
 
@@ -24,7 +24,7 @@ def add(request, project_id, todolist_id):
 
 @login_required
 def detail(request, project_id, todolist_id, pk):
-    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    project = Project.objects.filter(author=request.user).get(pk=project_id)
     todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
     task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
 
@@ -39,7 +39,7 @@ def detail(request, project_id, todolist_id, pk):
 
 @login_required
 def edit(request, project_id, todolist_id, pk):
-    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    project = Project.objects.filter(author=request.user).get(pk=project_id)
     todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
     task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
 
@@ -62,7 +62,7 @@ def edit(request, project_id, todolist_id, pk):
 
 @login_required
 def delete(request, project_id, todolist_id, pk):
-    project = Project.objects.filter(created_by=request.user).get(pk=project_id)
+    project = Project.objects.filter(author=request.user).get(pk=project_id)
     todolist = Todolist.objects.filter(project=project).get(pk=todolist_id)
     task = Task.objects.filter(project=project).filter(todolist=todolist).get(pk=pk)
     task.delete()
