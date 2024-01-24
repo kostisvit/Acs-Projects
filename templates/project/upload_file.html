@@ -5,8 +5,21 @@
 
     <form method="post" action="." enctype="multipart/form-data" class="ml-10">
         {% csrf_token %}
-
-        {{ form.as_p }}
+        <div class="flex items-center gap-x-4">
+            <label for="Name">Name:</label>
+            <input
+              type="text"
+              name="name"
+              class="w-1/3 px-4 py-2 border border-gray-300 outline-none focus:border-gray-400"
+              id="id_name"
+            />
+          </div>
+          <label class="block">
+            <span class="sr-only">Choose File</span>
+            <input type="file" name="attachment"  id="id_attachment" class="mt-10 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+          </label>
+        
+        
 
         <div>
             <button class="py-4 px-8 bg-sky-600 text-white mt-10">Submit</button>
