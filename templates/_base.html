@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{% static 'src/styles.css' %}">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
 
     <body>
@@ -29,7 +30,7 @@
 {% block content %}
 {% endblock %}
         <footer class="py-8 px-8 bg-slate-900 text-center">
-            <p class="text-white">Copyright (c) 2023 - Code With Stein</p>
+            <p class="text-white">Copyright {% now "Y" %} - AcsServices</p>
         </footer>
     </body>
 </html>
