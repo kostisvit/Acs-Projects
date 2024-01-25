@@ -23,7 +23,15 @@
                     <a href="{% url 'project:edit' project.id %}" class="text-green-700">Edit</a>
                     |
                     <a href="{% url 'project:delete' project.id %}" class="text-red-600">Delete</a>
-            </div>
+                    <p class="text-sm text-slate-600">
+                        {% if ptoject.status == True %}
+                        Status: Completed
+                        {% else %}
+                        Status: In progress
+                        {% endif %}
+                        </p>
+                    
+                    </div>
         {% endfor %}
     </div>
 {% endblock %}

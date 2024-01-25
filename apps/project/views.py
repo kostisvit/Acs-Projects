@@ -31,9 +31,9 @@ def add(request):
   if request.method == 'POST':
     name = request.POST.get('name', '')
     description = request.POST.get('description', '')
-
+    status = request.POST.get('status','') 
     if name:
-      Project.objects.create(name=name, description=description, author=request.user)
+      Project.objects.create(name=name, description=description, status=status,author=request.user)
 
       return redirect('/')
     else:
@@ -50,10 +50,11 @@ def edit(request, pk):
     if request.method == 'POST':
         name = request.POST.get('name', '')
         description = request.POST.get('description', '')
-
+        status = request.POST.get('status',False) == 'true'
         if name:
             project.name = name
             project.description = description
+            project.status = status
             project.save()
 
             return redirect('/')
