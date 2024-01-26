@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from .forms import ProjectFileForm
+from .forms import ProjectFileForm, ProjectForm
 from .models import Project,ProjectNote
 from django.shortcuts import render, redirect
 
@@ -26,44 +26,73 @@ def project(request, pk):
         'project': project
     })
 
+# @login_required
+# def add(request):
+#   if request.method == 'POST':
+#     name = request.POST.get('name', '')
+#     description = request.POST.get('description', '')
+    
+#     if name:
+#       Project.objects.create(name=name, description=description,author=request.user)
+
+#       return redirect('/')
+#     else:
+#       print('Not valid')
+
+#   return render(request, 'project/add.html')
+
 @login_required
 def add(request):
-  if request.method == 'POST':
-    name = request.POST.get('name', '')
-    description = request.POST.get('description', '')
-    status = request.POST.get('status','') 
-    if name:
-      Project.objects.create(name=name, description=description, status=status,author=request.user)
-
-      return redirect('/')
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.author = request.user
+            project.save()
+            print('Project created')
+            return redirect('/')
     else:
-      print('Not valid')
+        form=ProjectForm()
+    return render(request, 'project/add.html', {'form': form})
+            
 
-  return render(request, 'project/add.html')
 
+
+# @login_required
+# def edit(request, pk):
+#     project = Project.objects.filter(author=request.user).get(pk=pk)
+
+#     if request.method == 'POST':
+#         name = request.POST.get('name', '')
+#         description = request.POST.get('description', '')
+
+#         if name:
+#             project.name = name
+#             project.description = description
+#             project.save()
+
+#             return redirect('/')
+    
+#     return render(request, 'project/edit.html', {
+#         'project': project
+#     })
 
 
 @login_required
-def edit(request, pk):
-    project = Project.objects.filter(author=request.user).get(pk=pk)
-
+def edit(request,pk):
+    instance = get_object_or_404(Project,pk=pk)
     if request.method == 'POST':
-        name = request.POST.get('name', '')
-        description = request.POST.get('description', '')
-        status = request.POST.get('status',False) == 'true'
-        if name:
-            project.name = name
-            project.description = description
-            project.status = status
-            project.save()
-
+        form = ProjectForm(request.POST,instance=instance)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.author = request.user
+            instance.save()
+            print('Project created')
             return redirect('/')
+    else:
+        form=ProjectForm(instance=instance)
+    return render(request, 'project/edit.html', {'form': form})
     
-    return render(request, 'project/edit.html', {
-        'project': project
-    })
-
-
 
 @login_required
 def delete(request, pk):

@@ -6,7 +6,11 @@
 
     <div class="ml-10 mt-6 grid grid-cols-4 gap-4 mb-10">
         {% for project in projects %}
-            <div class="py-6 px-6 bg-slate-200">
+        {% if project.is_completed == True %}
+            <div class="py-6 px-6 bg-green-400">
+                {% else %}
+                <div class="py-6 px-6 bg-slate-200">
+                    {% endif %}
                 <p class="text-md text-slate-600 text-center text-xl font-bold">
                     Project {{ forloop.counter }}
                  </p>
@@ -24,10 +28,12 @@
                     |
                     <a href="{% url 'project:delete' project.id %}" class="text-red-600">Delete</a>
                     <p class="text-sm text-slate-600">
-                        {% if ptoject.status == True %}
+                        {% if project.is_completed == True %}
                         Status: Completed
-                        {% else %}
+                        {% elif project.is_completed == False %}
                         Status: In progress
+                        {% elif project.is_completed == None %}
+                        Status: -
                         {% endif %}
                         </p>
                     

@@ -15,7 +15,7 @@ class Project(TimeStampMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    status = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False)
     author = models.ForeignKey(CustomUser, related_name='projects', on_delete=models.CASCADE)
 
     def __str__(self):
