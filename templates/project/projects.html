@@ -29,7 +29,7 @@
                     <a href="{% url 'project:delete' project.id %}" class="text-red-600">Delete</a>
                     <p class="text-sm text-slate-600">
                         {% if project.is_completed == True %}
-                        Status: Completed
+                        Status: Completed at: {{ project.completion_date }}
                         {% elif project.is_completed == False %}
                         Status: In progress
                         {% elif project.is_completed == None %}
