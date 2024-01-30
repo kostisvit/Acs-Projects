@@ -13,22 +13,14 @@
             <div class="text-2xl font-bold">
             <h1 class="text-xl text-white"><a href="/">AcsServices Projects</a></h1>
             </div>
-            <div class="flex items-center">
-                <!-- Replace 'icon-name' with the name of the icon you want to use -->
-                <svg class="w-6 h-6 fill-current text-white mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M3 10a7 7 0 1114 0 7 7 0 01-14 0zm7 5a2 2 0 100-4 2 2 0 000 4z"/>
-                </svg>
-                
-                <!-- You can add more icons or elements here as needed -->
-              </div>
             <div class="space-x-4">
                 {% if user.is_authenticated %}
                 <button class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded mr-10"><a href="{% url 'project:projects' %}">Projects</a></button>
-                <a href="#" class="text-white">{{user.username}}</a>
-                <a href="{% url 'accounts:logout' %}" class="py-4 px-8 bg-slate-600 text-white">Log out</a>
+                <a href="#" class="text-white font-bold">{{user.username}}</a>
+                <a href="{% url 'accounts:logout' %}" class="py-2 px-4 font-bold bg-yellow-300 hover:bg-yellow-400 text-blue-950 rounded mr-10">Log out</a>
                 {% else %}
-                <a href="#" class="text-white">Anonymous</a>
-                <a href="{% url 'accounts:login' %}" class="py-4 px-8 bg-slate-600 text-white">Log in</a>
+                <a href="#" class="text-white font-bold">Anonymous</a>
+                <a href="{% url 'accounts:login' %}" class="py-2 px-4 font-bold bg-yellow-300 hover:bg-yellow-400 text-blue-950 rounded mr-10">Log in</a>
                 {% endif %}
             </div>
         </nav>
@@ -36,7 +28,7 @@
 
 {% block content %}
 {% endblock %}
-        <footer class="py-8 px-8 bg-slate-900 text-center">
+        <footer class="py-8 px-8 bg-blue-950 text-center">
             <p class="text-white">Copyright {% now "Y" %} - AcsServices</p>
         </footer>
     </body>

@@ -7,18 +7,18 @@
         <p class="ml-10 mb-6">{{ project.description }}</p>
     {% endif %}
 
-    <a href="{% url 'todolist:add' project.id %}" class="ml-10 py-4 px-8 bg-blue-950 text-white inline-block">Add todolist</a>
-    <a href="{% url 'project:edit' project.id %}" class="py-4 px-8 bg-sky-600 text-white inline-block">Edit</a>
-    <a href="{% url 'project:delete' project.id %}" class="py-4 px-8 bg-red-600 text-white inline-block">Delete</a>
+    <a href="{% url 'todolist:add' project.id %}" class="ml-10 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Add todolist</a>
+    <a href="{% url 'project:edit' project.id %}" class="py-4 px-8 bg-sky-600 text-white font-bold inline-block rounded">Edit</a>
+    <a href="{% url 'project:delete' project.id %}" class="py-4 px-8 bg-red-600 text-white font-bold inline-block rounded">Delete</a>
 
     <h2 class="ml-10 mt-6 text-2xl">Todo lists</h2>
 
     <div class="ml-10 mt-6 grid grid-cols-4 gap-4">
         {% for todolist in project.todolists.all %}
         {% if todolist.is_completed == True %}
-            <div class="py-6 px-6 bg-green-400">
+            <div class="py-6 px-6 bg-green-400 rounded">
                 {% else %}
-            <div class="py-6 px-6 bg-slate-200">
+            <div class="py-6 px-6 bg-slate-200 rounded">
                 {% endif %}
                 <p class="text-md text-slate-600">
                    Step {{ forloop.counter }}
@@ -48,12 +48,12 @@
 
     <h2 class="ml-10 mt-6 text-2xl">Files</h2>
 
-    <a href="{% url 'project:upload_file' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white inline-block">Upload file</a>
-    <a href="#" class="mt-6 py-4 px-8 bg-orange-600 text-white inline-block">Download files</a>
+    <a href="{% url 'project:upload_file' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Upload file</a>
+    <a href="#" class="mt-6 py-4 px-8 bg-yellow-300 hover:bg-yellow-400 font-bold text-blue-950 inline-block rounded">Download files</a>
 
-    <div class="ml-10 mt-6 grid grid-cols-4 gap-4">
+    <div class="ml-10 mt-6 flex gap-4">
         {% for projectfile in project.files.all %}
-            <div class="py-6 px-6 bg-slate-200">
+            <div class="py-6 px-6 bg-slate-200 rounded">
                 <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
 
                 <a href="{{ projectfile.attachment.url }}" target="_blank" class="text-sm text-slate-600">
@@ -74,11 +74,11 @@
 
     <h2 class="ml-10 mt-6 text-2xl">Notes</h2>
 
-    <a href="{% url 'project:add_note' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white inline-block">Add note</a>
+    <a href="{% url 'project:add_note' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Add note</a>
 
     <div class="mb-10 ml-10 mt-6 grid grid-cols-4 gap-4">
         {% for note in project.notes.all %}
-            <div class="py-6 px-6 bg-slate-200">
+            <div class="py-6 px-6 bg-slate-200 rounded">
                 <a href="{% url 'project:note_detail' project.id note.id %}">
                     <h3 class="mb-4 text-xl">{{ note.name }}</h3>
 
