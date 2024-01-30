@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProjectFileForm, ProjectForm
 from .models import Project,ProjectNote
 from django.shortcuts import render, redirect
+from django.utils import timezone
 
 
 @login_required
@@ -86,6 +87,7 @@ def edit(request,pk):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.author = request.user
+            instance.completion_date = timezone.now().date()
             instance.save()
             print('Project created')
             return redirect('/')
