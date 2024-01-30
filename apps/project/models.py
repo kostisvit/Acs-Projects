@@ -47,7 +47,7 @@ class ProjectFile(TimeStampMixin):
 
 
 
-class ProjectNote(models.Model):
+class ProjectNote(TimeStampMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project = models.ForeignKey(Project, related_name='notes', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)

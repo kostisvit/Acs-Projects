@@ -162,3 +162,6 @@ cython_debug/
 
 # tailwind 
 node_modules/
+
+# media files
+media/
