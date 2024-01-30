@@ -7,7 +7,7 @@
         <p class="ml-10 mb-6">{{ project.description }}</p>
     {% endif %}
 
-    <a href="{% url 'todolist:add' project.id %}" class="ml-10 py-4 px-8 bg-slate-500 text-white inline-block">Add todolist</a>
+    <a href="{% url 'todolist:add' project.id %}" class="ml-10 py-4 px-8 bg-blue-950 text-white inline-block">Add todolist</a>
     <a href="{% url 'project:edit' project.id %}" class="py-4 px-8 bg-sky-600 text-white inline-block">Edit</a>
     <a href="{% url 'project:delete' project.id %}" class="py-4 px-8 bg-red-600 text-white inline-block">Delete</a>
 
@@ -48,8 +48,8 @@
 
     <h2 class="ml-10 mt-6 text-2xl">Files</h2>
 
-    <a href="{% url 'project:upload_file' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-slate-600 text-white inline-block">Upload file</a>
-    <a href="#" class="mt-6 py-4 px-8 bg-green-600 text-white inline-block">Download files</a>
+    <a href="{% url 'project:upload_file' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white inline-block">Upload file</a>
+    <a href="#" class="mt-6 py-4 px-8 bg-orange-600 text-white inline-block">Download files</a>
 
     <div class="ml-10 mt-6 grid grid-cols-4 gap-4">
         {% for projectfile in project.files.all %}
@@ -74,7 +74,7 @@
 
     <h2 class="ml-10 mt-6 text-2xl">Notes</h2>
 
-    <a href="{% url 'project:add_note' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-slate-600 text-white inline-block">Add note</a>
+    <a href="{% url 'project:add_note' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white inline-block">Add note</a>
 
     <div class="mb-10 ml-10 mt-6 grid grid-cols-4 gap-4">
         {% for note in project.notes.all %}

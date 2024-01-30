@@ -69,7 +69,7 @@ def edit(request,project_id,pk):
             instance.completion_date = timezone.now().date()
             instance.save()
             print('Project created')
-            return redirect('/')
+            return redirect(f'/projects/{project_id}/')
     else:
         form=TodoListForm(instance=instance)
     return render(request, 'project/edit.html', {'project': project,
