@@ -2,7 +2,7 @@
 {% block content %}
     <h1 class="ml-10 mb-6 mt-10 text-3xl">Projects</h1>
 
-    <a href="{% url 'project:add' %}" class="ml-10 py-4 px-8 bg-blue-950 text-white inline-block rounded">Add project</a>
+    <a href="{% url 'project:add' %}" class="ml-10 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Add project</a>
 
     <div class="ml-10 mt-6 grid grid-cols-4 gap-4 mb-10">
         {% for project in projects %}
