@@ -1,0 +1,95 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h1 class="ml-10 mt-10 mb-6 text-3xl font-bold text-center text-blue-950">{{ project.name }}</h1>
+
+    {% if project.description %}
+        <p class="ml-10 mb-6 font-bold text-lg text-center text-blue-950">{{ project.description }}</p>
+    {% endif %}
+
+    <a href="{% url 'todolist:add' project.id %}" class="ml-10 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Add todolist</a>
+    <a href="{% url 'project:edit' project.id %}" class="py-4 px-8 bg-sky-600 text-white font-bold inline-block rounded">Edit</a>
+    <a href="{% url 'project:delete' project.id %}" class="py-4 px-8 bg-red-600 text-white font-bold inline-block rounded">Delete</a>
+
+    <h2 class="ml-10 mt-6 text-2xl">Todo lists</h2>
+
+    <div class="ml-10 mt-6 grid grid-cols-4 gap-4">
+        {% for todolist in project.todolists.all %}
+        {% if todolist.is_completed == True %}
+            <div class="py-6 px-6 bg-green-400 rounded">
+                {% else %}
+            <div class="py-6 px-6 bg-slate-200 rounded">
+                {% endif %}
+                <p class="text-md text-slate-600">
+                   Step {{ forloop.counter }}
+                </p>
+                <a href="{% url 'todolist:todolist' project.id todolist.id %}">
+                    <h3 class="mb-4 text-2xl">{{ todolist.name }}</h3>
+
+                    <p class="text-xl text-slate-600">
+                        {{ todolist.description }}
+                    </p>
+                    <p class="text-sm text-slate-600">
+                        {{ todolist.created_at }} from <a href="" class="font-medium"> {{ todolist.author }}</a>
+                    </p>
+                    <p class="text-sm text-slate-600">
+                        {% if todolist.is_completed == True %}
+                        Status: Completed at: {{ todolist.completion_date }}
+                        {% elif todolist.is_completed == False %}
+                        Status: In progress
+                        {% elif todolist.is_completed == None %}
+                        Status: -
+                        {% endif %}
+                        </p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="ml-10 mt-6 text-2xl">Files</h2>
+
+    <a href="{% url 'project:upload_file' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Upload file</a>
+    <a href="#" class="mt-6 py-4 px-8 bg-yellow-300 hover:bg-yellow-400 font-bold text-blue-950 inline-block rounded">Download files</a>
+
+    <div class="ml-10 mt-6 flex gap-4">
+        {% for projectfile in project.files.all %}
+            <div class="py-6 px-6 bg-slate-200 rounded">
+                <h3 class="mb-4 text-xl">{{ projectfile.name }}</h3>
+
+                <a href="{{ projectfile.attachment.url }}" target="_blank" class="text-sm text-slate-600">
+                    Download file
+                </a>
+
+                |
+
+                <a href="{% url 'project:delete_file' project.id projectfile.id %}" class="text-sm text-slate-600">
+                    Delete
+                </a>
+                <p class="text-sm text-slate-600">
+                    {{ projectfile.created_at }} from <a href="" class="font-medium"> {{ project.author }}</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="ml-10 mt-6 text-2xl">Notes</h2>
+
+    <a href="{% url 'project:add_note' project.id %}" class="ml-10 mt-6 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Add note</a>
+
+    <div class="mb-10 ml-10 mt-6 grid grid-cols-4 gap-4">
+        {% for note in project.notes.all %}
+            <div class="py-6 px-6 bg-slate-200 rounded">
+                <a href="{% url 'project:note_detail' project.id note.id %}">
+                    <h3 class="mb-4 text-xl">{{ note.name }}</h3>
+
+                    <p class="text-sm text-slate-600">
+                        {{ note.body|truncatechars:50 }}
+                    </p>
+                    <p class="text-sm text-slate-600">
+                        {{ note.created_at }} 
+                    </p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
