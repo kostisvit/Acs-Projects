@@ -1,10 +1,10 @@
 {% extends '_base.html' %}
 
 {% block content %}
-    <h1 class="ml-10 mt-10 mb-6 text-3xl">{{ project.name }}</h1>
+    <h1 class="ml-10 mt-10 mb-6 text-3xl font-bold text-center text-blue-950">{{ project.name }}</h1>
 
     {% if project.description %}
-        <p class="ml-10 mb-6">{{ project.description }}</p>
+        <p class="ml-10 mb-6 font-bold text-lg text-center text-blue-950">{{ project.description }}</p>
     {% endif %}
 
     <a href="{% url 'todolist:add' project.id %}" class="ml-10 py-4 px-8 bg-blue-950 text-white font-bold inline-block rounded">Add todolist</a>
