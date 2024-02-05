@@ -23,6 +23,10 @@ DEBUG = os.getenv('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+"http://localhost:7570",
+# Add other CSRF trusted origins here if needed
+]
 
 # Application definition
 

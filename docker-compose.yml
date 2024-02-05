@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    container_name: acs_projects
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - .:/acs_projects
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    env_file:
+      - .env
+  proxy:
+    container_name: acs_projects_proxy
+    build:
+      context: ./proxy
+    environment:
+      - TZ=Europe/Athens
+    volumes:
+      - static_data:/vol/acs_projects/static/
+      - static_media:/vol/acs_projects/media/
+    ports:
+      - "7570:7570"
+    depends_on:
+      - app
+volumes:
+  static_data:
+  static_media:
