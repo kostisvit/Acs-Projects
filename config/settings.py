@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
 "http://localhost:7570",
+"http://acsmaz.ddns.net:7570",
 # Add other CSRF trusted origins here if needed
 ]
 
@@ -106,7 +107,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.config(default=env('DATABASE_URL'))}
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('DATABASE_NAME'),
+            'USER': os.getenv('DATABASE_USER'),
+            'PASSWORD': os.getenv('DATABASE_PASS'),
+            'HOST': 'db',
+            'PORT': os.getenv('DATABASE_PORT'),
+            }
+             }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

@@ -5,9 +5,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 RUN mkdir /acs_projects
 COPY . /acs_projects
 WORKDIR /acs_projects
-COPY requirements1.txt /acs_projects/
+COPY requirements.txt /acs_projects/
 RUN python -m pip install --upgrade pip
-RUN pip install -r requirements1.txt
+RUN pip install -r requirements.txt
 
 RUN mkdir -p /vol/acs_projects/media
 RUN mkdir -p /vol/acs_projects/static
