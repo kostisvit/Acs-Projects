@@ -24,7 +24,7 @@ DEBUG = os.getenv('DEBUG', default=False)
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-"http://localhost:7570",
+"http://127.0.0.1:7570",
 "http://acsmaz.ddns.net:7570",
 # Add other CSRF trusted origins here if needed
 ]
