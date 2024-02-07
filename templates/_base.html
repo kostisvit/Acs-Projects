@@ -23,15 +23,14 @@
         </style>
         <nav class="py-6 px-8 flex items-center justify-between bg-blue-950 print-hide">
             <div class="text-2xl font-bold">
-            <h1 class="text-xl text-white"><a href="/">AcsServices Projects</a></h1>
+            <h1 class="text-xl text-white"><a href="{% url 'project:projects' %}">AcsServices Projects</a></h1>
             </div>
             <div class="space-x-4">
                 {% if user.is_authenticated %}
-                <button class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded mr-10"><a href="{% url 'project:projects' %}">Projects</a></button>
+                {% comment %} <button class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded mr-10"><a href="{% url 'project:projects' %}">Projects</a></button> {% endcomment %}
                 <a href="#" class="text-white font-bold">{{user.username}}</a>
                 <a href="{% url 'accounts:logout' %}" class="py-2 px-4 font-bold bg-yellow-300 hover:bg-yellow-400 text-blue-950 rounded mr-10">Log out</a>
                 {% else %}
-                <a href="#" class="text-white font-bold">Anonymous</a>
                 <a href="{% url 'accounts:login' %}" class="py-2 px-4 font-bold bg-yellow-300 hover:bg-yellow-400 text-blue-950 rounded mr-10">Log in</a>
                 {% endif %}
             </div>
