@@ -1,3 +1,5 @@
+from gzip import GzipFile
+import zipfile
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from .forms import ProjectFileForm, ProjectForm
@@ -204,3 +206,41 @@ def note_delete(request, project_id, pk):
     note.delete()
 
     return redirect(f'/projects/{project_id}/')
+
+
+
+
+
+
+
+
+
+
+
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+import os
+from django.conf import settings
+
+from .models import Project,ProjectFile
+
+def download_files(request, parent_id):
+    parent_model = get_object_or_404(Project, pk=parent_id)
+    files = parent_model.files.all()  # Assuming related_name is not defined
+
+    # Prepare zip file
+    import zipfile
+    from io import BytesIO
+
+    zip_buffer = BytesIO()
+    with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False) as zip_file:
+        for attachment in files:
+            file_path = os.path.join(settings.MEDIA_ROOT, str(attachment.attachment))
+            folder_name, filename = os.path.split(file_path)
+            zip_file.write(file_path, arcname=os.path.join(folder_name, f"{parent_model.name}_{filename}"))
+
+    # Prepare response
+    response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
+    response['Content-Disposition'] = f'attachment; filename={parent_model.name}_files.zip'
+    response['Content-Length'] = zip_buffer.tell()
+    return response

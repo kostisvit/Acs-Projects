@@ -19,4 +19,5 @@ urlpatterns = [
     path('<uuid:project_id>/notes/<uuid:pk>/', views.note_detail, name='note_detail'),
     path('<uuid:project_id>/notes/<uuid:pk>/edit/', views.note_edit, name='note_edit'),
     path('<uuid:project_id>/notes/<uuid:pk>/delete/', views.note_delete, name='note_delete'),
+    path('download-files/<uuid:parent_id>', views.download_files, name='download_all_files'),
 ]
