@@ -23,6 +23,13 @@ class Project(TimeStampMixin):
         self.is_completed = True
         self.completion_date = timezone.now().date()
         self.save()
+    
+    def delete(self, *args, **kwargs):
+        # Deleting associated ChildModel objects
+        files = self.files.all()
+        for projectfile in files:
+            projectfile.delete()
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -41,6 +48,13 @@ class ProjectFile(TimeStampMixin):
     project = models.ForeignKey(Project, related_name='files', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     attachment = models.FileField(upload_to=custom_upload_path)
+    
+    def delete(self, *args, **kwargs):
+        # Delete the file when the object is deleted
+        if self.attachment:
+            if os.path.isfile(self.attachment.path):
+                os.remove(self.attachment.path)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.name
